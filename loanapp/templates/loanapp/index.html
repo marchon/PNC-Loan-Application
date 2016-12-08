@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Loan And Budgeting Tool</title>
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+        <link rel="stylesheet" type="text/css" href="../../static/loanapp/style.css" />
+    </head>
+
+    <body>
+
+    <div class="main-wrapper">
+
+      <!--Static content-->
+        <div class="corner-logo">
+          <span>Parental Loan</span>
+        </div>
+
+        <div class="pure-g">
+          <div class="pure-u-1-8"></div>
+          <div class="pure-u-3-4 login-description">
+            <h2> Get the money you need for the things you want. </h2>
+            <hr>
+            <p>Clothes, concert tickets, a trip with friends, stuff for school - or something else entirely, its up to you
+              to decide what&#39s most important to you.<br><br>
+              This is a tool for teens, parents and guardians to create a personal loan with mutually agreed upon
+              terms in just a few simple steps.
+            </p>
+          </div>
+          <div class="pure-u-1-8"></div>
+
+        </div>
+
+        <!--Log in-->
+        <div class="color-wrapper">
+          <div class="pure-g">
+            <div class="pure-u-1-8"></div>
+            <div class="pure-u-3-4">
+              <h1>Please Log In</p>
+              <hr>
+            </div>
+          </div>
+
+          <div class="pure-g">
+            <div class="pure-u-1-8"></div>
+            <div class="pure-u-3-8">
+
+            <h3>Login</h3>
+              <form class="pure-form" id="login_form" method="post" action="/login/">
+                  {% csrf_token %}
+                  <input type="text" name="username" value="" placeholder="Username" size="50" />
+                  <br />
+                  <input type="password" name="password" value="" placeholder="Password" size="50" />
+                  <br />
+
+                  <input class="pure-button" type="submit" value="SIGN IN" />
+              </form>
+            </div>
+
+            <div class="pure-u-3-8">
+              <h3>New User? Create Account</h3>
+              <form class="pure-form" id="form" method="post" action="/main/" enctype="multipart/form-data">
+
+                  {% csrf_token %}
+                  {{ form.as_p }}
+
+                  <!-- Provide a button to click to submit the form. -->
+                  <input class="pure-button" type="submit" name="submit" value="CREATE ACCOUNT" />
+              </form>
+            </div>
+
+
+          </div>
+        </div>
+    </div>
+
+    </body>
+</html>

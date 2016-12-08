@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Revisit Loan</title>
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+        <link rel="stylesheet" type="text/css" href="../../static/loanapp/style.css" />
+    </head>
+    <body>
+            <div class="main-wrapper">
+
+      <!--Static content-->
+        <div class="corner-logo">
+          <span>Parental Loan</span>
+        </div>
+
+        <div class="pure-g">
+          <div class="pure-u-1-8"></div>
+          <div class="pure-u-5-8 login-description">
+            <h2> Revisit Loan </h2>
+            <hr>
+            <p>Need to change the terms of your teen’s loan? No problem! You can make changes to the plan here.
+            </p>
+                <button class="pure-button blue">Income & Expenses</button>
+                <button class="pure-button pure-button-primary dark-blue">Loan Terms</button>
+
+        <div class="dark-blue-color-wrapper"></div>
+
+            <div class="pure-g">
+                <div class="pure-u-3-8">
+                    <div class="yellow-color-wrapper">
+
+
+
+<!--                     <h2>Income & expenses</h2>
+        {% for expense in expenses %}
+        {{ expense }}
+        {% endfor %}
+        <h2>Loan Terms</h2> -->
+
+          
+                <h3> Loan Summary </h3>
+                  <hr>
+                  <form class="pure-form">
+                    {% csrf_token %}
+                      <label class="">Total Cost:</label>
+                      <input type="text" class="grey" value="{{ loan.total_cost}}" size="20" disabled>
+                      <br><br>
+                      <label class="">Total Interest:</label>
+                      <input type="text" class="grey" value="{{ loan.total_interest}}" size="20" disabled>
+                      <br><br>
+                      <label class="">Months to Pay Off:</label>
+                      <input type="text" class="grey" value="{{ loan.total_months}}" size="20" disabled>
+                      <br><br>
+                      <label class="">Current Interest Rate:</label>
+                      <br>
+                      <input type="text" class="grey" value="{{ loan.monthly_interest}}" size="20" disabled>
+                  </form>
+                  <form class="pure-form" id="form" method="post" action="/revisitloan/" enctype="multipart/form-data">
+                  {{loan_form_1.as_p}}
+                <hr>             
+                <table class="pure-table pure-table-horizontal" id="clear">
+                      <thead>
+                          <tr>
+                              <th></th>
+                              <th>Current</th>
+                              <th>Plan</th>
+                          </tr>
+                      </thead>
+
+                      <tbody>
+
+                        <tr>
+                              <td>Income</td>
+                              <td>{{ profile }}</td>
+                              <td><input type="text" value="" size="5" /></td>
+                        </tr>
+
+                        <tr>
+                              <td><h4>Expenses</h4></td>
+                              <td></td>
+                              <td></td>
+                        </tr>
+
+                        {% for expense in expenses %}
+                          <tr>
+                              <td>{{ expense.expense_category }}</td>
+                              <td>{{ expense.expense_amount }}</td>
+                              <td><input type="text" value="" size="5" /></td>
+                          </tr>
+                        {% endfor %}
+                      </tbody>
+                  </table>
+                <hr>
+
+                <table class="pure-table pure-table-horizontal" id="clear">
+                      <thead>
+                          <tr>
+                              <th></th>
+                              <th></th>
+                          </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr>
+                          <td>Minimum Loan Payment</td>
+                          <td>20</td>
+                        </tr>
+
+                        <tr>
+                          <td>Monthly Payment</td>
+                          <td>{{ loan_form_2.as_p }}</td>
+                        </tr>
+
+                      </tbody>
+                </table>
+          <input class="pure-button blue" type="submit" name="submit" value="CALCULATE" />
+        </div>
+
+          </div>
+          <div class="pure-u-5-8">
+            <div class="color-wrapper">
+            <form class="pure-form" id="form" method="post" action="/dash/" enctype="multipart/form-data">
+              {% csrf_token %}
+              <!-- Provide a button to click to submit the form. -->
+                <input class="pure-button blue" type="submit" name="submit" value="MARK AS COMPLETE" />
+            </form>
+            </div>
+            <br>
+            <button class="pure-button pure-button-primary dark-blue">Table View</button>
+            <button class="pure-button blue">Grid View</button>
+
+                      <table class="pure-table pure-table-horizontal" id="loan_table">
+                          <thead>
+                              <tr>
+                                  <th>Date</th>
+                                  <th>Loan Balance</th>
+                                  <th>Interest</th>
+                                  <th>Payment</th>
+                              </tr>
+                          </thead>
+
+                          <tbody>
+                            {% for month_loan in loan.loan_calculation %}
+                              <tr>
+                                  <td></td>
+                                  <td>{{ month_loan.0}}</td>
+                                  <td>{{ month_loan.1}}</td>
+                                  <td>{{ loan.string_monthly_amount}}</td>
+                              </tr>
+                            {% endfor %}
+                          </tbody>
+                      </table>
+
+
+
+          </div>
+
+        </div>
+                 <div class="pure-u-3-4 login-description">
+            <h3> Accept Loan Terms </h3>
+            <hr>
+
+            <label for="option-one" class="pure-checkbox">
+                <input id="option-one" type="checkbox" value="">
+                I accept the terms of this loan and agree to pay it back as outlined here.
+            </label>
+        </form>
+    </div>
+
+     </div>
+            </div>
+    </body>
+</html>

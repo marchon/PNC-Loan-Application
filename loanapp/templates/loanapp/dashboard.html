@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
+        
+        {% if user.is_authenticated %}
+        <head>
+        <title>Loan Dashboard</title>
+          <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+          <link rel="stylesheet" type="text/css" href="../../static/loanapp/style.css" />
+        </head>
+         <body>
+
+          <div class="main-wrapper">
+
+            <!--Static content-->
+              <div class="corner-logo">
+                <span>Parental Loan</span>
+              </div>
+
+              <div class="pure-g">
+                <div class="pure-u-1-8"></div>
+                <div class="pure-u-3-4 login-description">
+                  <h2> Loan Dashboard </h2>
+                  <hr>
+
+          {% for loan in loans %}
+            <div class="color-wrapper">
+              <div class="pure-g">
+                <div class="pure-u-1-8"></div>
+                  <div class="pure-u-3-4">
+                      <h2 class="inside_text">
+                          {{ loan.loan_name }}
+                      </h2>
+
+                      <h4 class="inside_text">Terms</h4>
+                      <p class="inside_text">
+                        {{ loan.loan_information }}
+                      </p>
+
+                      <table class="pure-table pure-table-horizontal" id="loan_table">
+                          <thead>
+                              <tr>
+                                  <th></th>
+                                  <th>Months</th>
+                                  <th>Amount</th>
+                              </tr>
+                          </thead>
+
+                          <tbody>
+                              <tr>
+                                  <td>Starting</td>
+                                  <td>{{ loan.loan_starting.0}}</td>
+                                  <td>{{ loan.loan_starting.1}}</td>
+                              </tr>
+
+                              <tr>
+                                  <td>Paid</td>
+                                  <td>{{ loan.loan_paid.0}}</td>
+                                  <td>{{ loan.loan_paid.1}}</td>
+                              </tr>
+
+                              <tr>
+                                  <td>Remaining</td>
+                                  <td>{{ loan.loan_remaining.0}}</td>
+                                  <td>{{ loan.loan_remaining.1}}</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+                </div>
+
+                <form action="/revisitloan/" method="post">
+                  {% csrf_token %}
+                 <input class="pure-button" type="submit" value="Revisit Loan" enctype="multipart/form-data"/>
+                </form>
+              </div>
+          {% endfor %}
+
+        	<h2>Create new loan:</h2>
+
+          <div class="pure-g">
+            <div class="pure-u-1-2">
+              <form id="form" class="pure-form" method="post" action="/dash/" enctype="multipart/form-data">
+
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <!-- Provide a button to click to submit the form. -->
+                <input class="pure-button" type="submit" name="continue" value="Create New Loan" />
+              </form>
+            </div>
+            <div class="pure-u-1-2 yellow-color-wrapper round-border">
+              <p id="help-text">{{ help_text }}</p>
+            </div>
+          </div>
+          </div> 
+           </div>
+                <div class="pure-u-1-8"></div>
+
+             </div> 
+
+            {{ form.media.js }}
+
+            <!-- Select 2 button code -->
+            <script type="text/javascript">
+                $("#id_borrower").select2({
+                  ajax: {
+                    url: "/users",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                      return {
+                        q: params.term, // search term
+                      };
+                    },
+                    processResults: function (data, params) {
+                      return {
+                        results: data,
+                      };
+                    },
+                    cache: true
+                  },
+                  escapeMarkup: function (markup) { return markup; },
+                  minimumInputLength: 1,
+                  templateResult: function(user) { return user.text; },
+                  templateSelection: function(user) { return user.text; },
+                  width: '50%'
+                });
+            </script>
+        </body>
+        {% else %}
+        <h1>Hello anonymous, please login or create new account</h1>
+        {% endif %}
+    </head>
+</html>
+

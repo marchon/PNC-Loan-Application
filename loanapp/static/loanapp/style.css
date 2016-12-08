@@ -1,0 +1,124 @@
+
+h1 {
+  color: black;
+  font: Helvetica, sans-serif; }
+
+.inside_text{
+  color: white;
+}
+
+#login_form input {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  width: 60%; }
+
+.color-wrapper {
+  background-color: #5F68F5;
+  padding-top: 3em;
+  padding-bottom: 3em; }
+
+  .color-wrapper h1 {
+    color: white;
+    font-weight: normal; }
+
+  .color-wrapper h3 {
+    color: white;
+    font-weight: normal; }
+
+.yellow-color-wrapper {
+  background-color: #fffdc3;
+  padding-top: 3em;
+  padding-bottom: 3em; }
+
+.yellow-color-wrapper.round-border {
+  border-radius: 5%;
+  border-color: #bc8024;
+}
+
+  .dark-blue-color-wrapper {
+  background-color: #102055;
+  padding-top: 3em;
+  padding-bottom: 3em; }
+
+    .dark-blue-color-wrapper label {
+    color: white;
+    font-weight: normal; }
+
+.corner-logo {
+  height: auto;
+  background-color: blue;
+  display: inline-block;
+  padding-left: 3em;
+  padding-right: 3em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  font-size: 1.2em;
+  color: white; }
+
+.login-description {
+  padding-top: 3em;
+  padding-bottom: 3em; }
+
+#loan_table{
+  background-color: white;
+}
+
+#help-text{
+  padding-right: 40px;
+  padding-left: 40px;
+}
+
+/*# sourceMappingURL=style.css.map */
+
+*, .pure-button{
+  font-family: "Avenir";
+}
+
+.pure-button{
+  background-color: #4266d7;
+  color: white;
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+}
+
+button.dark-blue{
+  background-color: #102055;
+}
+
+button.blue{
+  background-color: #5F68F5;
+}
+
+.pure-form input[type=text][disabled]{
+  background-color: gray;
+  border-color: transparent;
+}
+
+button#add, button.delete{
+  background-color: #5F68F5;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%
+}
+
+table#clear.pure-table.pure-table-horizontal, 
+table#clear.pure-table.pure-table-horizontal thead, 
+table#clear.pure-table.pure-table-horizontal tr,
+table#clear.pure-table.pure-table-horizontal td,
+table#clear.pure-table.pure-table-horizontal th,
+table#clear.pure-table.pure-table-horizontal tbody{
+  background-color: transparent;
+  border-color: transparent;
+  border-bottom-color: transparent;
+}
+
+text#space{
+  padding: 10px;
+}
+
+tr.spaceUnder > td
+{
+  padding-bottom: 1em;
+}

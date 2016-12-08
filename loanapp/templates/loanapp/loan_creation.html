@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Setup New Loan</title>
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+        <link rel="stylesheet" type="text/css" href="../../static/loanapp/style.css" />
+    </head>
+    <body>
+            <div class="main-wrapper">
+
+      <!--Static content-->
+        <div class="corner-logo">
+          <span>Parental Loan</span>
+        </div>
+
+        <div class="pure-g">
+          <div class="pure-u-1-8"></div>
+          <div class="pure-u-5-8 login-description">
+            <h2> Setup New Loan </h2>
+            <hr>
+            
+                <button class="pure-button blue" onclick="location.href='{% url 'make_profile' %}'">Income & Expenses</button>
+                <button class="pure-button pure-button-primary dark-blue" >Loan Terms</button>
+
+        <div class="dark-blue-color-wrapper">
+          <p class="inside_text">
+            &emsp;&emsp; Use this worksheet to make the conversation for setting up a loan between you and your
+                child easy. </p>
+            <p class="inside_text">
+                &emsp;&emsp; You can also see what payments have been made, and how they affect the loan
+                balance and interest.
+            </p>
+        </div>
+
+            <div class="pure-g">
+                <div class="pure-u-3-8">
+                    <div class="yellow-color-wrapper">
+
+
+
+<!--                     <h2>Income & expenses</h2>
+        {% for expense in expenses %}
+        {{ expense }}
+        {% endfor %}
+        <h2>Loan Terms</h2> -->
+        &emsp;
+            <form class="pure-form" id="form" method="post" action="/loanterms/" enctype="multipart/form-data">
+
+                {% csrf_token %}
+                <table>
+                  <thead>
+                    <th></th>
+                    <th></th>
+                  </thead>
+
+                  <tbody>
+                    <tr class="spaceUnder">
+                      {{ loan_form_1.original_amt.errors }}
+                      <td style="width: 60%">
+                        <label for="{{ loan_form_1.original_amt.id_for_label }}">
+                          &emsp;Cost of {{loan.loan_purpose}}
+                        </label>
+                      </td>
+                      <td>
+                        $ {{loan_form_1.original_amt}}
+                      </td>
+                    </tr>
+                    <tr class="spaceUnder">
+                        <td>
+                          <label>&emsp;Down Payment</label>
+                        </td>
+                        <td>
+                          $ {{loan_form_1.down_amt}}
+                        </td>
+                    </tr>            
+                    <tr class="spaceUnder">
+                        {{ loan_form_1.interest.errors }}
+                        <td>
+                          &emsp;<label for="{{ loan_form_1.interest.id_for_label }}">Interest Rate</label>
+                        </td>
+                        <td>
+                          &emsp;{{ loan_form_1.interest }} %
+                        </td>
+                    </tr>
+                  </tbody>
+                </table>                
+                <hr>
+                <div>              
+                  <table class="pure-table pure-table-horizontal" id="clear">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Current</th>
+                                <th>Plan</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                          <tr>
+                                <td>Income</td>
+                                <td>{{ profile }}</td>
+                                <td><input id="planned_income" type="text" value="{{profile}}" size="5" /></td>
+                          </tr>
+
+                          <tr>
+                                <td><h4>Expenses</h4></td>
+                                <td></td>
+                                <td></td>
+                          </tr>
+
+                          {% for expense in expenses %}
+                            <tr>
+                                <td>{{ expense.expense_category }}</td>
+                                <td>{{ expense.expense_amount }}</td>
+                                <td><input id="planned_expense" type="text" value="{{expense.expense_amount}}" size="5" /></td>
+                            </tr>
+                          {% endfor %}
+                          <tr>
+                                <td><h4>Remaining</h4></td>
+                                <td></td>
+                                <td>&emsp;{{profile.saving}}</td>
+                          </tr>
+
+
+                        </tbody>
+                    </table>
+
+                <hr>
+              </div>
+                <table class="pure-table pure-table-horizontal" id="clear" style="padding: 30px;">
+                      <thead>
+                          <tr>
+                              <th></th>
+                              <th></th>
+                          </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr>
+                          <td style="width:60%">Minimum Loan Payment</td>
+                          <td>{{ loan.min_amount }}</td>
+                        </tr>
+
+                        <tr>
+                          <td>Monthly Payment</td>
+                          <td>{{ loan_form_2.as_p }}</td>
+                        </tr>
+
+                      </tbody>
+                </table>
+
+                <!-- Provide a button to click to submit the form. -->
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input class="pure-button blue" type="submit" name="submit" value="CALCULATE" />
+            </form>
+
+        </div>
+          </div>
+          <div class="pure-u-5-8">
+            <div class="color-wrapper">
+                <h3> &emsp;&emsp;Loan Summary </h3>
+                <hr>
+                <form class="pure-form">
+                  <table class="pure-table pure-table-horizontal" id="clear" style="padding: 30px;">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr>
+                            <td style="width:60%"><label class="inside_text">&emsp;&emsp;Total Cost of {{loan.loan_purpose}}:</label></td>
+                            <td><input type="text" value="{{ loan.total_cost}}" size="20" disabled></td>
+                          </tr>
+
+                          <tr>
+                            <td><label class="inside_text">&emsp;&emsp;Total Interest:</label></td>
+                            <td><input type="text" value="{{ loan.total_interest}}" size="20" disabled></td>
+                          </tr>
+
+                           <tr>
+                            <td><label class="inside_text">&emsp;&emsp;Months to Pay Off:</label></td>
+                            <td><input type="text" value="{{ loan.total_months}}" size="20" disabled></td>
+                          </tr>
+
+                        </tbody>
+                  </table>
+                    
+                    
+                    
+                </form>
+            </div>
+            <br>
+            <div style="padding-left: 30px;">
+              <button class="pure-button pure-button-primary dark-blue">Table View</button>
+              <button class="pure-button blue">Grid View</button>
+
+                        <table class="pure-table pure-table-horizontal" id="loan_table">
+                            <thead>
+                                <tr class="dark-blue" style="
+    background-color: #102055;
+    color: white;">
+                                    <th>Date</th>
+                                    <th>Loan Balance</th>
+                                    <th>Interest</th>
+                                    <th>Payment</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                              {% for month_loan in loan.loan_calculation %}
+                                <tr>
+                                    <td>{{ month_loan.3}}</td>
+                                    <td>{{ month_loan.0}}</td>
+                                    <td>{{ month_loan.1}}</td>
+                                    <td>{{ month_loan.2}}</td>
+                                </tr>
+                              {% endfor %}
+                            </tbody>
+                        </table>
+              </div>
+
+
+
+          </div>
+
+        </div>
+    </div>
+
+        <div class="pure-g">
+          <div class="pure-u-1-8"></div>
+          <div class="pure-u-3-4 login-description">
+            <h3> Accept Loan Terms </h3>
+            <hr>
+            <p>Making timely loan payments is important, it means that you build trust and good financial history with
+whomever is lending it to you. Whether its the bank of mom or a large national bank, building trust
+means that in the future when you need to borrow larger amounts you will be trusted to pay it back, and
+therefore have a better chance of getting the loan you need.
+            </p>
+        <form class="pure-form" id="form" method="post" action="/dash/" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <div style="display: none;">
+                {{ loan_form_1.as_p }}
+            </div>
+
+            <h4> {{loan.loan_person}} </h4>
+            <p> Remind me when I owe via </p>
+            <fieldset id="group1">
+                <label for="sms_child">SMS</label>
+                <input type="radio" id="sms_child" value="" name="group1">
+                <label for="email_child">Email</label>
+                <input type="radio" id="email_child" value="email" name="group1">
+                <input type="text" placeholder="Enter Contact" />
+            </fieldset>
+
+            <h4> Lender </h4>
+            <p> Remind me when I owe via </p>
+
+            <fieldset id="group2">
+                <label for="sms_parent">SMS</label>
+                <input type="radio" id="sms_parent" value="" name="group2">
+                <label for="email_parent">Email</label>
+                <input type="radio" id="email_parent" value="" name="group2">
+                <input type="text" placeholder="Enter Contact" />
+            </fieldset>
+
+            <label for="option-one" class="pure-checkbox">
+                <input id="option-one" type="checkbox" value="">
+                I accept the terms of this loan and agree to pay it back as outlined here.
+            </label>
+
+            <button type="submit" class="pure-button pure-input-1-2 pure-button-primary">Make Loan</button>
+        </form>
+      </div>
+          </div>
+
+     </div>
+            </div>
+    </body>
+</html>
