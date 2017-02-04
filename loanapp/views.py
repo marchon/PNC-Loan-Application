@@ -86,6 +86,8 @@ def make_loan(request):
 	context = RequestContext(request)
 	if request.method == "POST":
 		current_loan = acct.loan_set.latest('id')
+		current_profile = (acct.loan_set.latest('id')).profile_set.latest('id')
+		current_expenses = current_profile.expense_set.all()
 		l1_form = LoanForm2(request.POST)
 		l2_form = LoanForm3(request.POST)
 		if l1_form.is_valid() and l2_form.is_valid():

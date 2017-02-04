@@ -116,12 +116,6 @@
                                 <td><input id="planned_expense" type="text" value="{{expense.expense_amount}}" size="5" /></td>
                             </tr>
                           {% endfor %}
-                          <tr>
-                                <td><h4>Remaining</h4></td>
-                                <td></td>
-                                <td>&emsp;{{profile.saving}}</td>
-                          </tr>
-
 
                         </tbody>
                     </table>
@@ -139,7 +133,12 @@
                       <tbody>
                         <tr>
                           <td style="width:60%">Minimum Loan Payment</td>
-                          <td>{{ loan.min_amount }}</td>
+                          <td>&emsp;&emsp;&emsp;{{ loan.min_amount }}</td>
+                        </tr>
+
+                        <tr>
+                              <td><h4>Remaining</h4></td>
+                              <td><h4>&emsp;{{profile.saving}}</h4></td>
                         </tr>
 
                         <tr>
@@ -196,8 +195,6 @@
             <br>
             <div style="padding-left: 30px;">
               <button class="pure-button pure-button-primary dark-blue">Table View</button>
-              <button class="pure-button blue">Grid View</button>
-
                         <table class="pure-table pure-table-horizontal" id="loan_table">
                             <thead>
                                 <tr class="dark-blue" style="

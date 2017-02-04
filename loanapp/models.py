@@ -7,10 +7,10 @@ import datetime
 
 class Expense(models.Model):
 	profile = models.ForeignKey('Profile', on_delete=models.CASCADE, null=True)
-	category = models.CharField(max_length=100)
-	amount = models.DecimalField(max_digits=10, decimal_places=2)
-	plan_category = models.CharField(max_length=100, default='0.0')
-	plan_amount = models.DecimalField(max_digits=10, decimal_places=2, default='0.0')
+	category = models.CharField(max_length=100, default="", null=True)
+	amount = models.DecimalField(max_digits=10, default=0.0,decimal_places=2, null=True)
+	plan_category = models.CharField(max_length=100, default='0.0', null=True)
+	plan_amount = models.DecimalField(max_digits=10, decimal_places=2, default='0.0', null=True)
 	def __str__(self):
 		return self.category + " : " + str(self.amount)
 	def expense_category(self):

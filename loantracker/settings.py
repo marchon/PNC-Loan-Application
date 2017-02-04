@@ -25,7 +25,7 @@ SECRET_KEY = 'c4a5$60%gtfzu)ratq-_f3b_c*5(y*^vuf0jti5_t%#f@mph46'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'dbp2.apt.ri.cmu.edu']
 
 
 # Application definition
@@ -79,6 +79,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'HOST': 'localhost',
+        'PORT': ''
     }
 }
 
